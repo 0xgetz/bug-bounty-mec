@@ -147,6 +147,24 @@ bug-bounty-mec/
 
 ---
 
+
+---
+
+## 💳 MEC Reward Wallet Address
+
+> Semua reward dari program Bug Bounty Phase I harap dikirimkan ke alamat wallet berikut:
+
+
+
+| Field | Detail |
+|-------|--------|
+| **Network** | ME Hub (Settlement Layer) |
+| **Denom** | $MEC (umec) |
+| **Address** |  |
+| **Researcher** | [@0xgetz](https://github.com/0xgetz) |
+
+*Address generated via ME Pass — reward can be exchanged to USDT and withdrawn anytime.*
+
 ## 🔗 References
 
 - [Bug Bounty Program](https://www.mec.me/en-US/bug-bounty)
