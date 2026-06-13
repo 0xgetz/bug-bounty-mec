@@ -160,7 +160,7 @@ bug-bounty-mec/
 |-------|--------|
 | **Network** | ME Hub (Settlement Layer) |
 | **Denom** | $MEC (umec) |
-| **Address** |  |
+| **Address** | me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj |
 | **Researcher** | [@0xgetz](https://github.com/0xgetz) |
 
 *Address generated via ME Pass — reward can be exchanged to USDT and withdrawn anytime.*
