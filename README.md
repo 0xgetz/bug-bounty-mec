@@ -65,6 +65,83 @@ The report includes for each bug:
 
 ---
 
+
+---
+
+## 📸 Bug Screenshots — Code Evidence
+
+> Visual proof for each vulnerability with highlighted vulnerable code, root cause, and fix.
+
+### 🔴 Bug #1 — CRITICAL
+**AllocateBlockReward — sdkmath.Int.Int64() Overflow → EndBloc**
+
+![Bug #1](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug01_wdistri_int64_overflow.png)
+
+### 🟠 Bug #2 — HIGH
+**JoinGroup & procKycRegionChange — Empty Admin Panic After Un**
+
+![Bug #2](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug02_joingroup_empty_admin_panic.png)
+
+### 🟡 Bug #3 — MEDIUM
+**sendKycRewards — Silent DelegateInterest Skip Causes Treasur**
+
+![Bug #3](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug03_sendkycrewards_silent_skip.png)
+
+### 🟠 Bug #4 — HIGH
+**getRewardsByHeight — Off-by-One at Halving Boundaries → Infl**
+
+![Bug #4](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug04_getrewardheight_offbyone.png)
+
+### 🟠 Bug #5 — HIGH
+**WithdrawFromRegion — No Solvency Check Allows GlobalDAO to D**
+
+![Bug #5](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug05_withdrawfromregion_nosolvency.png)
+
+### 🟡 Bug #6 — MEDIUM
+**DoFixedDeposit — Wrong Solvency Formula Accepts Deposits on **
+
+![Bug #6](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug06_dofixeddeposit_wrong_formula.png)
+
+### 🟠 Bug #7 — HIGH
+**IbcTransferFromRegionTreasure — Receiver Hardcoded as Sender**
+
+![Bug #7](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug07_ibc_receiver_hardcoded.png)
+
+### 🟡 Bug #8 — MEDIUM
+**RemoveMeidNFT — Wrong Store Key Prefix → Regional Index Neve**
+
+![Bug #8](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug08_removemeidnft_wrong_prefix.png)
+
+### 🟡 Bug #9 — MEDIUM
+**SetFixedDepositCfgRate — Rate Change Silently Locks Deposito**
+
+![Bug #9](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug09_setfixeddepositcfgrate_lock.png)
+
+### 🟡 Bug #10 — MEDIUM
+**UpdateValidatorPubKey — Old SlashingInfo Never Deleted → Sla**
+
+![Bug #10](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug10_updatevalidatorpubkey_leak.png)
+
+### 🔴 Bug #11 — CRITICAL
+**MsgUpdate Same RegionId → TransferKycRegion Self-Transfer In**
+
+![Bug #11](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug11_msgupdate_same_region_inflation.png)
+
+### 🟠 Bug #12 — HIGH
+**Gravity: cleanupTimedOutBatches & OutgoingTxBatchExecuted Mu**
+
+![Bug #12](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug12_gravity_iterator_mutation.png)
+
+### 🟠 Bug #13 — HIGH
+**GetCurrentRelayerSet — uint64 Overflow in totalPower Corrupt**
+
+![Bug #13](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug13_gravity_uint64_overflow.png)
+
+### 🟡 Bug #14 — MEDIUM
+**Delegate — Returns Wrong newShares for Experience Region → M**
+
+![Bug #14](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug14_delegate_wrong_newshares.png)
+
 ## 🔴 Bug #1 — CRITICAL: AllocateBlockReward Int64 Overflow
 
 **File:** `x/wdistri/keeper/keeper.go`
