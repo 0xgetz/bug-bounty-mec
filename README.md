@@ -2,12 +2,11 @@
 
 <div align="center">
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Bugs Found](https://img.shields.io/badge/bugs%20found-10-red)
-![Critical](https://img.shields.io/badge/critical-1-darkred)
-![High](https://img.shields.io/badge/high-4-orange)
-![Medium](https://img.shields.io/badge/medium-5-yellow)
-![Reward](https://img.shields.io/badge/estimated%20reward-$5.8K–$15K%20MEC-green)
+![Bugs Found](https://img.shields.io/badge/Total%20Bugs-14-critical?style=for-the-badge)
+![Critical](https://img.shields.io/badge/Critical-2-red?style=for-the-badge)
+![High](https://img.shields.io/badge/High-6-orange?style=for-the-badge)
+![Medium](https://img.shields.io/badge/Medium-6-yellow?style=for-the-badge)
+![Reward](https://img.shields.io/badge/Estimated%20Reward-%248.8K%E2%80%9322K%20MEC-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -15,202 +14,182 @@
 
 ## 📋 Overview
 
-This repository contains an original security research report for the **META EARTH HUB Bug Bounty Phase I** program, covering the ME Hub Settlement Layer.
+Original security research report for the **META EARTH HUB Bug Bounty Phase I** program.  
+All bugs are independently discovered, deeply analyzed, and verified non-duplicate.
 
-- **Target Repository:** [openmetaearth/me-hub](https://github.com/openmetaearth/me-hub)
-- **Bug Bounty Program:** [mec.me/en-US/bug-bounty](https://www.mec.me/en-US/bug-bounty)
-- **Scope:** ME Hub (Settlement Layer) — Phase I
-- **Total Bugs Found:** 10 original, non-duplicate vulnerabilities
-- **Submitted Issues:** [#1240–#1249](https://github.com/openmetaearth/me-hub/issues)
-
----
-
-## 📄 Report
-
-📥 **[Download Full Report (DOCX)](./ME_Hub_Bug_Bounty_Report.docx)**
-
-The report includes for each bug:
-- Root cause analysis with vulnerable code
-- Panic log / exploit scenario
-- Step-by-step reproduction guide
-- Specific fix with corrected code
+| Field | Detail |
+|-------|--------|
+| **Target** | [openmetaearth/me-hub](https://github.com/openmetaearth/me-hub) |
+| **Program** | [mec.me/en-US/bug-bounty](https://www.mec.me/en-US/bug-bounty) |
+| **Scope** | ME Hub — Settlement Layer (Phase I) |
+| **Total Bugs** | 14 original vulnerabilities |
+| **Issues Submitted** | [#1240–#1254](https://github.com/openmetaearth/me-hub/issues?q=is%3Aissue+author%3A0xgetz) |
+| **Researcher** | [@0xgetz](https://github.com/0xgetz) |
+| **Reward Wallet** | `me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj` |
 
 ---
 
-## 🔍 Vulnerability Summary
+## 📥 Full Report
+
+📄 **[Download Complete Bug Report (DOCX)](./ME_Hub_Bug_Bounty_Report.docx)**
+
+Each report contains: vulnerable code, root cause analysis, exploit scenario, panic log / reproduction steps, and specific code fix.
+
+---
+
+## 💳 Reward Wallet Address
+
+All `$MEC` rewards should be sent to:
+
+```
+me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj
+```
+
+*Generated via ME Pass — as per Bug Bounty program Rule 5. Freely exchangeable to USDT.*
+
+---
+
+## 🔍 Complete Vulnerability Summary
+
+### Round 1 — Issues #1240–#1249
 
 | # | Severity | Module | Function | Title | Issue |
 |---|----------|--------|----------|-------|-------|
-| 1 | 🔴 **Critical** | `x/wdistri` | `AllocateBlockReward()` | `sdkmath.Int.Int64()` overflow → EndBlocker panic → chain halt | [#1240](https://github.com/openmetaearth/me-hub/issues/1240) |
-| 2 | 🟠 **High** | `x/megroup` | `JoinGroup()`, `procKycRegionChange()` | Empty group admin panic after `UnBondRegion` → chain halt | [#1241](https://github.com/openmetaearth/me-hub/issues/1241) |
-| 3 | 🟡 **Medium** | `x/wstaking` | `sendKycRewards()` | Silent `DelegateInterest` accounting skip → treasury divergence | [#1242](https://github.com/openmetaearth/me-hub/issues/1242) |
-| 4 | 🟠 **High** | `x/wstaking` | `getRewardsByHeight()` | Off-by-one at halving boundaries → inflated reward payments | [#1243](https://github.com/openmetaearth/me-hub/issues/1243) |
-| 5 | 🟠 **High** | `x/wstaking` | `WithdrawFromRegion()` | No solvency check → GlobalDAO can drain treasury | [#1244](https://github.com/openmetaearth/me-hub/issues/1244) |
-| 6 | 🟡 **Medium** | `x/wstaking` | `DoFixedDeposit()` | Wrong solvency formula → deposits accepted on insolvent treasury | [#1245](https://github.com/openmetaearth/me-hub/issues/1245) |
-| 7 | 🟠 **High** | `x/wstaking` | `IbcTransferFromRegionTreasure()` | Receiver hardcoded as sender → funds permanently burned on destination chain | [#1246](https://github.com/openmetaearth/me-hub/issues/1246) |
-| 8 | 🟡 **Medium** | `x/wstaking` | `RemoveMeidNFT()` | Wrong store key prefix → regional index never cleaned, storage leak | [#1247](https://github.com/openmetaearth/me-hub/issues/1247) |
-| 9 | 🟡 **Medium** | `x/wstaking` | `SetFixedDepositCfgRate()` | Rate change silently locks existing depositors from KYC region migration | [#1248](https://github.com/openmetaearth/me-hub/issues/1248) |
-| 10 | 🟡 **Medium** | `x/wstaking` | `UpdateValidatorPubKey()` | Old slashing `SigningInfo` never deleted → slashing module storage leak | [#1249](https://github.com/openmetaearth/me-hub/issues/1249) |
+| 1 | 🔴 Critical | `x/wdistri` | `AllocateBlockReward()` | `sdkmath.Int.Int64()` overflow → EndBlocker panics → chain halt | [#1240](https://github.com/openmetaearth/me-hub/issues/1240) |
+| 2 | 🟠 High | `x/megroup` | `JoinGroup()`, `procKycRegionChange()` | Empty group admin panic after `UnBondRegion` → chain halt | [#1241](https://github.com/openmetaearth/me-hub/issues/1241) |
+| 3 | 🟡 Medium | `x/wstaking` | `sendKycRewards()` | Silent `DelegateInterest` deduction skip → treasury accounting divergence | [#1242](https://github.com/openmetaearth/me-hub/issues/1242) |
+| 4 | 🟠 High | `x/wstaking` | `getRewardsByHeight()` | Off-by-one at halving boundaries → inflated delegation interest payments | [#1243](https://github.com/openmetaearth/me-hub/issues/1243) |
+| 5 | 🟠 High | `x/wstaking` | `WithdrawFromRegion()` | No solvency check → GlobalDAO can drain treasury below `DelegateInterest` | [#1244](https://github.com/openmetaearth/me-hub/issues/1244) |
+| 6 | 🟡 Medium | `x/wstaking` | `DoFixedDeposit()` | Wrong solvency formula → deposits accepted on insolvent treasury | [#1245](https://github.com/openmetaearth/me-hub/issues/1245) |
+| 7 | 🟠 High | `x/wstaking` | `IbcTransferFromRegionTreasure()` | Receiver hardcoded as sender address → funds permanently burned on destination chain | [#1246](https://github.com/openmetaearth/me-hub/issues/1246) |
+| 8 | 🟡 Medium | `x/wstaking` | `RemoveMeidNFT()` | Wrong store key prefix → regional index never deleted, persistent storage leak | [#1247](https://github.com/openmetaearth/me-hub/issues/1247) |
+| 9 | 🟡 Medium | `x/wstaking` | `SetFixedDepositCfgRate()` | Rate change silently locks existing depositors from KYC region migration | [#1248](https://github.com/openmetaearth/me-hub/issues/1248) |
+| 10 | 🟡 Medium | `x/wstaking` | `UpdateValidatorPubKey()` | Old consensus address `SigningInfo` never deleted → slashing module storage leak | [#1249](https://github.com/openmetaearth/me-hub/issues/1249) |
+
+### Round 2 — Issues #1251–#1254
+
+| # | Severity | Module | Function | Title | Issue |
+|---|----------|--------|----------|-------|-------|
+| 11 | 🔴 Critical | `x/kyc`, `x/wstaking` | `Update()`, `transferDeposit()` | Same-region `MsgUpdate` inflates `FixedDepositAmount` indefinitely via self-transfer overwrite | [#1251](https://github.com/openmetaearth/me-hub/issues/1251) |
+| 12 | 🟠 High | `x/gravity` | `cleanupTimedOutBatches()`, `OutgoingTxBatchExecuted()` | Store mutation inside active batch iterator → skipped cancellations or chain panic | [#1252](https://github.com/openmetaearth/me-hub/issues/1252) |
+| 13 | 🟠 High | `x/gravity` | `GetCurrentRelayerSet()` | `uint64` overflow in `totalPower` accumulation corrupts bridge validator normalization | [#1253](https://github.com/openmetaearth/me-hub/issues/1253) |
+| 14 | 🟡 Medium | `x/wstaking` | `Delegate()` | Returns wrong `newShares` for experience region → misleading events, indexer inconsistency | [#1254](https://github.com/openmetaearth/me-hub/issues/1254) |
 
 ---
 
-## 💰 Reward Breakdown
+## 💰 Reward Estimate
 
-| Severity | Count | Range per Bug | Total Range |
-|----------|-------|--------------|-------------|
-| 🔴 Critical | 1 | $2,000 – $5,000 MEC | $2,000 – $5,000 |
-| 🟠 High | 4 | $1,000 – $2,000 MEC | $4,000 – $8,000 |
-| 🟡 Medium | 5 | $100 – $1,000 MEC | $500 – $5,000 |
-| **Total** | **10** | — | **$5,800 – $15,000 MEC** |
-
----
-
+| Severity | Count | Per Bug | Subtotal |
+|----------|-------|---------|----------|
+| 🔴 Critical | 2 | $2,000 – $5,000 MEC | $4,000 – $10,000 |
+| 🟠 High | 6 | $1,000 – $2,000 MEC | $6,000 – $12,000 |
+| 🟡 Medium | 6 | $100 – $1,000 MEC | $600 – $6,000 |
+| **Total** | **14** | — | **$8,800 – $22,000 MEC** |
 
 ---
 
 ## 📸 Bug Screenshots — Code Evidence
 
-> Visual proof for each vulnerability with highlighted vulnerable code, root cause, and fix.
-
-### 🔴 Bug #1 — CRITICAL
-**AllocateBlockReward — sdkmath.Int.Int64() Overflow → EndBloc**
-
-![Bug #1](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug01_wdistri_int64_overflow.png)
-
-### 🟠 Bug #2 — HIGH
-**JoinGroup & procKycRegionChange — Empty Admin Panic After Un**
-
-![Bug #2](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug02_joingroup_empty_admin_panic.png)
-
-### 🟡 Bug #3 — MEDIUM
-**sendKycRewards — Silent DelegateInterest Skip Causes Treasur**
-
-![Bug #3](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug03_sendkycrewards_silent_skip.png)
-
-### 🟠 Bug #4 — HIGH
-**getRewardsByHeight — Off-by-One at Halving Boundaries → Infl**
-
-![Bug #4](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug04_getrewardheight_offbyone.png)
-
-### 🟠 Bug #5 — HIGH
-**WithdrawFromRegion — No Solvency Check Allows GlobalDAO to D**
-
-![Bug #5](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug05_withdrawfromregion_nosolvency.png)
-
-### 🟡 Bug #6 — MEDIUM
-**DoFixedDeposit — Wrong Solvency Formula Accepts Deposits on **
-
-![Bug #6](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug06_dofixeddeposit_wrong_formula.png)
-
-### 🟠 Bug #7 — HIGH
-**IbcTransferFromRegionTreasure — Receiver Hardcoded as Sender**
-
-![Bug #7](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug07_ibc_receiver_hardcoded.png)
-
-### 🟡 Bug #8 — MEDIUM
-**RemoveMeidNFT — Wrong Store Key Prefix → Regional Index Neve**
-
-![Bug #8](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug08_removemeidnft_wrong_prefix.png)
-
-### 🟡 Bug #9 — MEDIUM
-**SetFixedDepositCfgRate — Rate Change Silently Locks Deposito**
-
-![Bug #9](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug09_setfixeddepositcfgrate_lock.png)
-
-### 🟡 Bug #10 — MEDIUM
-**UpdateValidatorPubKey — Old SlashingInfo Never Deleted → Sla**
-
-![Bug #10](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug10_updatevalidatorpubkey_leak.png)
-
-### 🔴 Bug #11 — CRITICAL
-**MsgUpdate Same RegionId → TransferKycRegion Self-Transfer In**
-
-![Bug #11](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug11_msgupdate_same_region_inflation.png)
-
-### 🟠 Bug #12 — HIGH
-**Gravity: cleanupTimedOutBatches & OutgoingTxBatchExecuted Mu**
-
-![Bug #12](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug12_gravity_iterator_mutation.png)
-
-### 🟠 Bug #13 — HIGH
-**GetCurrentRelayerSet — uint64 Overflow in totalPower Corrupt**
-
-![Bug #13](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug13_gravity_uint64_overflow.png)
-
-### 🟡 Bug #14 — MEDIUM
-**Delegate — Returns Wrong newShares for Experience Region → M**
-
-![Bug #14](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug14_delegate_wrong_newshares.png)
-
-## 🔴 Bug #1 — CRITICAL: AllocateBlockReward Int64 Overflow
-
-**File:** `x/wdistri/keeper/keeper.go`
-
-```go
-// VULNERABLE
-regionCoins := sdk.NewCoins(sdk.NewCoin(params.BaseDenom, sdk.NewInt(regionAmount.Int64())))
-// ↑ .Int64() PANICS if regionAmount > 9,223,372,036,854,775,807
-
-// FIXED
-regionCoins := sdk.NewCoins(sdk.NewCoin(params.BaseDenom, regionAmount))
-```
-
-**Impact:** When daily FeeCollector balance exceeds `math.MaxInt64` (~9.22×10¹⁸ umec), `EndBlocker` panics → **permanent chain halt**.
+> Each screenshot shows: vulnerable code highlighted in red, suggested fix in green,  
+> root cause analysis panel, linked GitHub issue, and reward wallet address.
 
 ---
 
-## 🟠 Bug #2 — HIGH: Empty Admin Panic After UnBondRegion
+### 🔴 Bug #1 — CRITICAL | `x/wdistri` | [Issue #1240](https://github.com/openmetaearth/me-hub/issues/1240)
+**`AllocateBlockReward` — `sdkmath.Int.Int64()` overflow in EndBlocker → permanent chain halt**
 
-**File:** `x/megroup/keeper/msg_server_join_group.go`
-
-```go
-// When GlobalDAO fully unstakes → UnBondRegion → group.Admin = ""
-// Then any JoinGroup call:
-sdk.MustAccAddressFromBech32(groupInfo.Admin) // ← PANIC: "empty address string is not allowed"
-```
-
-**Impact:** Any user can unknowingly trigger chain halt after GlobalDAO unstake.
+![Bug #1 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug01_wdistri_int64_overflow.png)
 
 ---
 
-## 🟠 Bug #4 — HIGH: Off-by-One at Halving Boundaries
+### 🟠 Bug #2 — HIGH | `x/megroup` | [Issue #1241](https://github.com/openmetaearth/me-hub/issues/1241)
+**`JoinGroup` & `procKycRegionChange` — empty group admin panic after `UnBondRegion` → chain halt**
 
-**File:** `x/wstaking/keeper/alias_functions.go`
-
-```go
-// BUG A (start period overcounts +1):
-blockCount = int64(N)*(lowMul+1) - fromHeight + 1  // ← +1 wrong
-
-// BUG B (end period undercounts -1):
-blockCount = toHeight - int64(N)*i - 1              // ← -1 wrong
-
-// FIX:
-blockCount = int64(N)*(lowMul+1) - fromHeight  // Bug A fixed
-blockCount = toHeight - int64(N)*i             // Bug B fixed
-```
-
-**Impact:** Users earn `+0.5R` per halving boundary crossed → systematic treasury drain violating emission schedule.
+![Bug #2 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug02_joingroup_empty_admin_panic.png)
 
 ---
 
-## 🟠 Bug #7 — HIGH: IBC Transfer Funds Burned
+### 🟡 Bug #3 — MEDIUM | `x/wstaking` | [Issue #1242](https://github.com/openmetaearth/me-hub/issues/1242)
+**`sendKycRewards` — silent `DelegateInterest` deduction skip → treasury accounting divergence**
 
-**File:** `x/wstaking/keeper/msg_server_ibc_transfer_from_region_treasure.go`
+![Bug #3 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug03_sendkycrewards_silent_skip.png)
 
-```go
-// VULNERABLE: both sender and receiver = treasureAddress
-_, err := k.IbcTransferKeeper.Transfer(ctx, ibctransfertypes.NewMsgTransfer(
-    msg.SourcePort, msg.SourceChannel, msg.Token,
-    treasureAddress,   // sender
-    treasureAddress,   // receiver ← BUG: funds go to uncontrolled address on dest chain
-    ...
-))
+---
 
-// FIXED:
-receiver := msg.Receiver  // use intended destination
-```
+### 🟠 Bug #4 — HIGH | `x/wstaking` | [Issue #1243](https://github.com/openmetaearth/me-hub/issues/1243)
+**`getRewardsByHeight` — off-by-one errors at halving boundaries → inflated delegation interest payments**
 
-**Impact:** All IBC transfers from region treasury are effectively burned — funds permanently lost on destination chain.
+![Bug #4 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug04_getrewardheight_offbyone.png)
+
+---
+
+### 🟠 Bug #5 — HIGH | `x/wstaking` | [Issue #1244](https://github.com/openmetaearth/me-hub/issues/1244)
+**`WithdrawFromRegion` — no solvency check allows GlobalDAO to drain treasury below `DelegateInterest` obligations**
+
+![Bug #5 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug05_withdrawfromregion_nosolvency.png)
+
+---
+
+### 🟡 Bug #6 — MEDIUM | `x/wstaking` | [Issue #1245](https://github.com/openmetaearth/me-hub/issues/1245)
+**`DoFixedDeposit` — wrong solvency formula uses `regionShare` and `initAllocationFunds` not in actual interest calculation**
+
+![Bug #6 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug06_dofixeddeposit_wrong_formula.png)
+
+---
+
+### 🟠 Bug #7 — HIGH | `x/wstaking` | [Issue #1246](https://github.com/openmetaearth/me-hub/issues/1246)
+**`IbcTransferFromRegionTreasure` — receiver hardcoded as treasury address → funds sent to uncontrolled address, permanently burned**
+
+![Bug #7 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug07_ibc_receiver_hardcoded.png)
+
+---
+
+### 🟡 Bug #8 — MEDIUM | `x/wstaking` | [Issue #1247](https://github.com/openmetaearth/me-hub/issues/1247)
+**`RemoveMeidNFT` — uses `account` instead of `regionId` as store prefix → regional index never cleaned, storage leak grows unboundedly**
+
+![Bug #8 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug08_removemeidnft_wrong_prefix.png)
+
+---
+
+### 🟡 Bug #9 — MEDIUM | `x/wstaking` | [Issue #1248](https://github.com/openmetaearth/me-hub/issues/1248)
+**`SetFixedDepositCfgRate` — rate change when active deposits exist silently locks all depositors from KYC region migration**
+
+![Bug #9 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug09_setfixeddepositcfgrate_lock.png)
+
+---
+
+### 🟡 Bug #10 — MEDIUM | `x/wstaking` | [Issue #1249](https://github.com/openmetaearth/me-hub/issues/1249)
+**`UpdateValidatorPubKey` — old consensus address `ValidatorSigningInfo` never deleted from slashing module → persistent storage leak**
+
+![Bug #10 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug10_updatevalidatorpubkey_leak.png)
+
+---
+
+### 🔴 Bug #11 — CRITICAL | `x/kyc` + `x/wstaking` | [Issue #1251](https://github.com/openmetaearth/me-hub/issues/1251)
+**`MsgUpdate` same `regionId` — `transferDeposit` self-transfer inflates `FixedDepositAmount` by deposit principal per call, indefinitely**
+
+![Bug #11 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug11_msgupdate_same_region_inflation.png)
+
+---
+
+### 🟠 Bug #12 — HIGH | `x/gravity` | [Issue #1252](https://github.com/openmetaearth/me-hub/issues/1252)
+**`cleanupTimedOutBatches` & `OutgoingTxBatchExecuted` — `DeleteBatch` called inside active `IterateOutgoingTxBatches` iterator → skipped cancellations or chain panic**
+
+![Bug #12 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug12_gravity_iterator_mutation.png)
+
+---
+
+### 🟠 Bug #13 — HIGH | `x/gravity` | [Issue #1253](https://github.com/openmetaearth/me-hub/issues/1253)
+**`GetCurrentRelayerSet` — `uint64` silent overflow when total relayer power exceeds `MaxUint64` → bridge validator powers inflated → single-relayer quorum exploit**
+
+![Bug #13 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug13_gravity_uint64_overflow.png)
+
+---
+
+### 🟡 Bug #14 — MEDIUM | `x/wstaking` | [Issue #1254](https://github.com/openmetaearth/me-hub/issues/1254)
+**`Delegate` — returns `delegation.Amount` (unchanged) instead of `bondAmt` for experience region delegations → wrong `newShares` emitted in events**
+
+![Bug #14 Screenshot](https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots/bug14_delegate_wrong_newshares.png)
 
 ---
 
@@ -218,57 +197,41 @@ receiver := msg.Receiver  // use intended destination
 
 ```
 bug-bounty-mec/
-├── README.md                        ← This file
-└── ME_Hub_Bug_Bounty_Report.docx   ← Full report (all 10 bugs)
+├── README.md                          ← This file
+├── ME_Hub_Bug_Bounty_Report.docx     ← Full DOCX report (all 14 bugs)
+└── screenshots/
+    ├── bug01_wdistri_int64_overflow.png
+    ├── bug02_joingroup_empty_admin_panic.png
+    ├── bug03_sendkycrewards_silent_skip.png
+    ├── bug04_getrewardheight_offbyone.png
+    ├── bug05_withdrawfromregion_nosolvency.png
+    ├── bug06_dofixeddeposit_wrong_formula.png
+    ├── bug07_ibc_receiver_hardcoded.png
+    ├── bug08_removemeidnft_wrong_prefix.png
+    ├── bug09_setfixeddepositcfgrate_lock.png
+    ├── bug10_updatevalidatorpubkey_leak.png
+    ├── bug11_msgupdate_same_region_inflation.png
+    ├── bug12_gravity_iterator_mutation.png
+    ├── bug13_gravity_uint64_overflow.png
+    └── bug14_delegate_wrong_newshares.png
 ```
 
 ---
 
-
----
-
-
----
-
-## 🆕 Round 2 — Additional Bugs Found (#1251–#1254)
-
-| # | Severity | Issue | Title |
-|---|----------|-------|-------|
-| 11 | 🔴 Critical | [#1251](https://github.com/openmetaearth/me-hub/issues/1251) | MsgUpdate with Same RegionId Calls TransferKycRegion Self-Transfer — F |
-| 12 | 🟠 High | [#1252](https://github.com/openmetaearth/me-hub/issues/1252) | cleanupTimedOutBatches and OutgoingTxBatchExecuted Mutate KV Store Ins |
-| 13 | 🟠 High | [#1253](https://github.com/openmetaearth/me-hub/issues/1253) | GetCurrentRelayerSet uint64 Overflow in totalPower Accumulation Produc |
-| 14 | 🟡 Medium | [#1254](https://github.com/openmetaearth/me-hub/issues/1254) | Delegate Returns Wrong newShares for Experience Region — Misleading Ev |
-
-
-*All Round 2 bugs verified non-duplicate against issues #1–#1253*
-## 💳 MEC Reward Wallet Address
-
-> Semua reward dari program Bug Bounty Phase I harap dikirimkan ke alamat wallet berikut:
-
-
-
-| Field | Detail |
-|-------|--------|
-| **Network** | ME Hub (Settlement Layer) |
-| **Denom** | $MEC (umec) |
-| **Address** | me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj |
-| **Researcher** | [@0xgetz](https://github.com/0xgetz) |
-
-*Address generated via ME Pass — reward can be exchanged to USDT and withdrawn anytime.*
-
 ## 🔗 References
 
-- [Bug Bounty Program](https://www.mec.me/en-US/bug-bounty)
-- [ME Hub Repository](https://github.com/openmetaearth/me-hub)
-- [Submitted Issues #1240–#1249](https://github.com/openmetaearth/me-hub/issues?q=is%3Aissue+author%3A0xgetz)
-- [MetaEarth Developer Twitter](https://twitter.com/MetaEarthDevs)
+- 🌐 [Bug Bounty Program](https://www.mec.me/en-US/bug-bounty)
+- 💻 [ME Hub Source Repository](https://github.com/openmetaearth/me-hub)
+- 🐛 [All Submitted Issues by @0xgetz](https://github.com/openmetaearth/me-hub/issues?q=is%3Aissue+author%3A0xgetz)
+- 🐦 [MetaEarth Developers Twitter](https://twitter.com/MetaEarthDevs)
+- 💬 [MetaEarth Developer Telegram](https://t.me/metaearthdevs)
 
 ---
 
 <div align="center">
 
-*All vulnerabilities are original findings, verified non-duplicate against issues #1–#1239.*
+*All 14 vulnerabilities are original findings, verified non-duplicate against issues #1–#1250.*
 
-*Submitted under the META EARTH Bug Bounty Phase I program — Prize Pool: $100,000 MEC*
+*Submitted under the META EARTH Bug Bounty Phase I — Prize Pool: $100,000 MEC*
 
 </div>
