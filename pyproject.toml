@@ -1,0 +1,12 @@
+[project]
+name = "bug-bounty-mec"
+version = "0.1.0"
+description = "META EARTH HUB Bug Bounty — vulnerability pattern tests"
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+test = ["pytest>=7.0", "pytest-cov>=4.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
