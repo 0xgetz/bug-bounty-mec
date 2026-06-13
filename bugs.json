@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "target_repo": "openmetaearth/me-hub",
+    "target_url": "https://github.com/openmetaearth/me-hub",
+    "program_url": "https://www.mec.me/en-US/bug-bounty",
+    "scope": "ME Hub \u2014 Settlement Layer (Phase I)",
+    "researcher": "@0xgetz",
+    "researcher_url": "https://github.com/0xgetz",
+    "reward_wallet": "me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj",
+    "issues_url": "https://github.com/openmetaearth/me-hub/issues?q=is%3Aissue+author%3A0xgetz",
+    "issue_range": "#1240\u2013#1254",
+    "screenshot_base_url": "https://raw.githubusercontent.com/0xgetz/bug-bounty-mec/main/screenshots",
+    "prize_pool": "$100,000 MEC",
+    "program_display": "mec.me/en-US/bug-bounty",
+    "reward_total": "$8,800 \u2013 $22,000 MEC"
+  },
+  "reward_tiers": {
+    "critical": { "label": "Critical", "emoji": "\ud83d\udd34", "per_bug": "$2,000 \u2013 $5,000 MEC", "subtotal": "$4,000 \u2013 $10,000" },
+    "high":     { "label": "High",     "emoji": "\ud83d\udfe0", "per_bug": "$1,000 \u2013 $2,000 MEC", "subtotal": "$6,000 \u2013 $12,000" },
+    "medium":   { "label": "Medium",   "emoji": "\ud83d\udfe1", "per_bug": "$100 \u2013 $1,000 MEC",   "subtotal": "$600 \u2013 $6,000" }
+  },
+  "references": [
+    { "emoji": "\ud83c\udf10", "label": "Bug Bounty Program",         "url": "https://www.mec.me/en-US/bug-bounty" },
+    { "emoji": "\ud83d\udcbb", "label": "ME Hub Source Repository",    "url": "https://github.com/openmetaearth/me-hub" },
+    { "emoji": "\ud83d\udc1b", "label": "All Submitted Issues by @0xgetz", "url": "https://github.com/openmetaearth/me-hub/issues?q=is%3Aissue+author%3A0xgetz" },
+    { "emoji": "\ud83d\udc26", "label": "MetaEarth Developers Twitter", "url": "https://twitter.com/MetaEarthDevs" },
+    { "emoji": "\ud83d\udcac", "label": "MetaEarth Developer Telegram", "url": "https://t.me/metaearthdevs" }
+  ],
+  "rounds": [
+    {
+      "name": "Round 1",
+      "issue_range": "Issues #1240\u2013#1249"
+    },
+    {
+      "name": "Round 2",
+      "issue_range": "Issues #1251\u2013#1254"
+    }
+  ],
+  "bugs": [
+    {
+      "id": 1,
+      "round": 1,
+      "severity": "critical",
+      "module": "x/wdistri",
+      "functions": ["AllocateBlockReward()"],
+      "title": "`sdkmath.Int.Int64()` overflow \u2192 EndBlocker panics \u2192 chain halt",
+      "issue_number": 1240,
+      "screenshot": "bug01_wdistri_int64_overflow.png",
+      "detail_title": "`AllocateBlockReward` \u2014 `sdkmath.Int.Int64()` overflow in EndBlocker \u2192 permanent chain halt"
+    },
+    {
+      "id": 2,
+      "round": 1,
+      "severity": "high",
+      "module": "x/megroup",
+      "functions": ["JoinGroup()", "procKycRegionChange()"],
+      "title": "Empty group admin panic after `UnBondRegion` \u2192 chain halt",
+      "issue_number": 1241,
+      "screenshot": "bug02_joingroup_empty_admin_panic.png",
+      "detail_title": "`JoinGroup` & `procKycRegionChange` \u2014 empty group admin panic after `UnBondRegion` \u2192 chain halt"
+    },
+    {
+      "id": 3,
+      "round": 1,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["sendKycRewards()"],
+      "title": "Silent `DelegateInterest` deduction skip \u2192 treasury accounting divergence",
+      "issue_number": 1242,
+      "screenshot": "bug03_sendkycrewards_silent_skip.png",
+      "detail_title": "`sendKycRewards` \u2014 silent `DelegateInterest` deduction skip \u2192 treasury accounting divergence"
+    },
+    {
+      "id": 4,
+      "round": 1,
+      "severity": "high",
+      "module": "x/wstaking",
+      "functions": ["getRewardsByHeight()"],
+      "title": "Off-by-one at halving boundaries \u2192 inflated delegation interest payments",
+      "issue_number": 1243,
+      "screenshot": "bug04_getrewardheight_offbyone.png",
+      "detail_title": "`getRewardsByHeight` \u2014 off-by-one errors at halving boundaries \u2192 inflated delegation interest payments"
+    },
+    {
+      "id": 5,
+      "round": 1,
+      "severity": "high",
+      "module": "x/wstaking",
+      "functions": ["WithdrawFromRegion()"],
+      "title": "No solvency check \u2192 GlobalDAO can drain treasury below `DelegateInterest`",
+      "issue_number": 1244,
+      "screenshot": "bug05_withdrawfromregion_nosolvency.png",
+      "detail_title": "`WithdrawFromRegion` \u2014 no solvency check allows GlobalDAO to drain treasury below `DelegateInterest` obligations"
+    },
+    {
+      "id": 6,
+      "round": 1,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["DoFixedDeposit()"],
+      "title": "Wrong solvency formula \u2192 deposits accepted on insolvent treasury",
+      "issue_number": 1245,
+      "screenshot": "bug06_dofixeddeposit_wrong_formula.png",
+      "detail_title": "`DoFixedDeposit` \u2014 wrong solvency formula uses `regionShare` and `initAllocationFunds` not in actual interest calculation"
+    },
+    {
+      "id": 7,
+      "round": 1,
+      "severity": "high",
+      "module": "x/wstaking",
+      "functions": ["IbcTransferFromRegionTreasure()"],
+      "title": "Receiver hardcoded as sender address \u2192 funds permanently burned on destination chain",
+      "issue_number": 1246,
+      "screenshot": "bug07_ibc_receiver_hardcoded.png",
+      "detail_title": "`IbcTransferFromRegionTreasure` \u2014 receiver hardcoded as treasury address \u2192 funds sent to uncontrolled address, permanently burned"
+    },
+    {
+      "id": 8,
+      "round": 1,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["RemoveMeidNFT()"],
+      "title": "Wrong store key prefix \u2192 regional index never deleted, persistent storage leak",
+      "issue_number": 1247,
+      "screenshot": "bug08_removemeidnft_wrong_prefix.png",
+      "detail_title": "`RemoveMeidNFT` \u2014 uses `account` instead of `regionId` as store prefix \u2192 regional index never cleaned, storage leak grows unboundedly"
+    },
+    {
+      "id": 9,
+      "round": 1,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["SetFixedDepositCfgRate()"],
+      "title": "Rate change silently locks existing depositors from KYC region migration",
+      "issue_number": 1248,
+      "screenshot": "bug09_setfixeddepositcfgrate_lock.png",
+      "detail_title": "`SetFixedDepositCfgRate` \u2014 rate change when active deposits exist silently locks all depositors from KYC region migration"
+    },
+    {
+      "id": 10,
+      "round": 1,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["UpdateValidatorPubKey()"],
+      "title": "Old consensus address `SigningInfo` never deleted \u2192 slashing module storage leak",
+      "issue_number": 1249,
+      "screenshot": "bug10_updatevalidatorpubkey_leak.png",
+      "detail_title": "`UpdateValidatorPubKey` \u2014 old consensus address `ValidatorSigningInfo` never deleted from slashing module \u2192 persistent storage leak"
+    },
+    {
+      "id": 11,
+      "round": 2,
+      "severity": "critical",
+      "module": "x/kyc`, `x/wstaking",
+      "functions": ["Update()", "transferDeposit()"],
+      "title": "Same-region `MsgUpdate` inflates `FixedDepositAmount` indefinitely via self-transfer overwrite",
+      "issue_number": 1251,
+      "screenshot": "bug11_msgupdate_same_region_inflation.png",
+      "detail_title": "`MsgUpdate` same `regionId` \u2014 `transferDeposit` self-transfer inflates `FixedDepositAmount` by deposit principal per call, indefinitely"
+    },
+    {
+      "id": 12,
+      "round": 2,
+      "severity": "high",
+      "module": "x/gravity",
+      "functions": ["cleanupTimedOutBatches()", "OutgoingTxBatchExecuted()"],
+      "title": "Store mutation inside active batch iterator \u2192 skipped cancellations or chain panic",
+      "issue_number": 1252,
+      "screenshot": "bug12_gravity_iterator_mutation.png",
+      "detail_title": "`cleanupTimedOutBatches` & `OutgoingTxBatchExecuted` \u2014 `DeleteBatch` called inside active `IterateOutgoingTxBatches` iterator \u2192 skipped cancellations or chain panic"
+    },
+    {
+      "id": 13,
+      "round": 2,
+      "severity": "high",
+      "module": "x/gravity",
+      "functions": ["GetCurrentRelayerSet()"],
+      "title": "`uint64` overflow in `totalPower` accumulation corrupts bridge validator normalization",
+      "issue_number": 1253,
+      "screenshot": "bug13_gravity_uint64_overflow.png",
+      "detail_title": "`GetCurrentRelayerSet` \u2014 `uint64` silent overflow when total relayer power exceeds `MaxUint64` \u2192 bridge validator powers inflated \u2192 single-relayer quorum exploit"
+    },
+    {
+      "id": 14,
+      "round": 2,
+      "severity": "medium",
+      "module": "x/wstaking",
+      "functions": ["Delegate()"],
+      "title": "Returns wrong `newShares` for experience region \u2192 misleading events, indexer inconsistency",
+      "issue_number": 1254,
+      "screenshot": "bug14_delegate_wrong_newshares.png",
+      "detail_title": "`Delegate` \u2014 returns `delegation.Amount` (unchanged) instead of `bondAmt` for experience region delegations \u2192 wrong `newShares` emitted in events"
+    }
+  ]
+}

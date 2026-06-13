@@ -197,7 +197,9 @@ me1fs6l6vrwhmqykn4wtvjsswpsy0j0ggm2jmywyj
 
 ```
 bug-bounty-mec/
-├── README.md                          ← This file
+├── README.md                          ← Generated from bugs.json
+├── bugs.json                          ← Single source of truth for all bug data
+├── generate_readme.py                 ← README generator script
 ├── ME_Hub_Bug_Bounty_Report.docx     ← Full DOCX report (all 14 bugs)
 └── screenshots/
     ├── bug01_wdistri_int64_overflow.png
