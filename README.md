@@ -150,6 +150,20 @@ bug-bounty-mec/
 
 ---
 
+
+---
+
+## 🆕 Round 2 — Additional Bugs Found (#1251–#1254)
+
+| # | Severity | Issue | Title |
+|---|----------|-------|-------|
+| 11 | 🔴 Critical | [#1251](https://github.com/openmetaearth/me-hub/issues/1251) | MsgUpdate with Same RegionId Calls TransferKycRegion Self-Transfer — F |
+| 12 | 🟠 High | [#1252](https://github.com/openmetaearth/me-hub/issues/1252) | cleanupTimedOutBatches and OutgoingTxBatchExecuted Mutate KV Store Ins |
+| 13 | 🟠 High | [#1253](https://github.com/openmetaearth/me-hub/issues/1253) | GetCurrentRelayerSet uint64 Overflow in totalPower Accumulation Produc |
+| 14 | 🟡 Medium | [#1254](https://github.com/openmetaearth/me-hub/issues/1254) | Delegate Returns Wrong newShares for Experience Region — Misleading Ev |
+
+
+*All Round 2 bugs verified non-duplicate against issues #1–#1253*
 ## 💳 MEC Reward Wallet Address
 
 > Semua reward dari program Bug Bounty Phase I harap dikirimkan ke alamat wallet berikut:
